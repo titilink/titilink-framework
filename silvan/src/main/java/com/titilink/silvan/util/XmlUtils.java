@@ -30,39 +30,47 @@
  *
  * titilink is a registered trademark of titilink.inc
  */
-package com.titilink.silvan.model;
+package com.titilink.silvan.util;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import java.util.List;
+import java.io.File;
+import java.io.InputStream;
 
 /**
- * 描述：
- * <p>
+ * xml工具类，通过xstream实现xml和bean之间的互相转化
+ *
  * @author by kam
- * @date 2015/05/01
+ * @date 2015/10/21
  * @since v1.0.0
  */
-@XStreamAlias("apis")
-public class ApiList {
+public final class XmlUtils {
 
-    @XStreamImplicit(itemFieldName = "api")
-    private List<SilvanApi> apis;
-
-    public List<SilvanApi> getApis() {
-        return apis;
+    public static <T> T toBean(String xmlStr, Class<T> clazz) {
+        XStream xStream = new XStream(new DomDriver());
+        xStream.processAnnotations(clazz);
+        T obj = (T) xStream.fromXML(xmlStr);
+        return obj;
     }
 
-    public void setApis(List<SilvanApi> apis) {
-        this.apis = apis;
+    public static <T> T toBean(File file, Class<T> clazz) {
+        XStream xStream = new XStream(new DomDriver());
+        xStream.processAnnotations(clazz);
+        T obj = (T) xStream.fromXML(file);
+        return obj;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("ApiList{");
-        sb.append("apis=").append(apis);
-        sb.append('}');
-        return sb.toString();
+    public static <T> T toBean(InputStream is, Class<T> clazz) {
+        XStream xStream = new XStream(new DomDriver());
+        xStream.processAnnotations(clazz);
+        T obj = (T) xStream.fromXML(is);
+        return obj;
     }
+
+    public static <T> String toXml(T t) {
+        XStream xStream = new XStream(new DomDriver());
+        return xStream.toXML(t);
+    }
+
 }
