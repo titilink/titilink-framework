@@ -59,6 +59,7 @@ import javax.net.ssl.*;
  * to validate the client certificate.</li>
  * </ul>
  * <p>
+ * 客户端SSL工厂类
  * <p>
  * @author by kam
  * @date 2015/05/01

@@ -33,6 +33,8 @@
 package com.titilink.camel.rest.server;
 
 import com.titilink.camel.rest.common.AdapterRestletUtil;
+import com.titilink.camel.rest.connector.HttpConnector;
+import com.titilink.camel.rest.connector.RestletConnector;
 import com.titilink.common.log.AppLogger;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -120,7 +122,6 @@ public final class CamelServer {
         CHANNEL_LIST.clear();
         BOSS_GROUP_LIST.clear();
         WORKER_GROUP_LIST.clear();
-        RestletServerWrapperMgt.cleanAll();
     }
 
     private static void run(int port, boolean supportSSL) {
@@ -131,15 +132,13 @@ public final class CamelServer {
         EventLoopGroup workerGroup = new NioEventLoopGroup(DEFAULT_NIO_EVENT_NUM);
         WORKER_GROUP_LIST.add(workerGroup);
 
-        // 在启动时候把wrapper拉起，并缓存起来，其中host为null代表使用本地ip
         String host = AdapterRestletUtil.getProperty(SERVER_REST_IP, LOCAL_HOST);
-        RestletServerWrapper restletServerWrapper = new RestletServerWrapper(host, port, supportSSL);
-        RestletServerWrapperMgt.cacheDefaultWrapper(restletServerWrapper, supportSSL);
+        HttpConnector httpConnector = new RestletConnector(host, port, supportSSL);
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new HttpServerInitializer(supportSSL));
+                    .childHandler(new HttpServerInitializer(supportSSL, httpConnector));
             b.childOption(ChannelOption.SO_KEEPALIVE, true);
             b.childOption(ChannelOption.TCP_NODELAY, true);
             b.option(ChannelOption.SO_BACKLOG, DEFAULT_SO_BACKLOG);

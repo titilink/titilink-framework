@@ -64,7 +64,7 @@ public final class CommonUtils {
     /**
      * 需要校验Request的包名前缀
      */
-    private static final String PACKAGE_NAME_PREFIX = "com.huawei.console.";
+    private static final String PACKAGE_NAME_PREFIX = "com.titilink";
 
     /**
      * 校验时需要过滤的属性名

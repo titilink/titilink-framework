@@ -1,39 +1,41 @@
 /**
  * Copyright 2005-2015 titilink
- *
+ * <p/>
  * The contents of this file are subject to the terms of one of the following
  * open source licenses: Apache 2.0 or LGPL 3.0 or LGPL 2.1 or CDDL 1.0 or EPL
  * 1.0 (the "Licenses"). You can select the license that you prefer but you may
  * not use this file except in compliance with one of these Licenses.
- *
+ * <p/>
  * You can obtain a copy of the Apache 2.0 license at
  * http://www.opensource.org/licenses/apache-2.0
- *
+ * <p/>
  * You can obtain a copy of the LGPL 3.0 license at
  * http://www.opensource.org/licenses/lgpl-3.0
- *
+ * <p/>
  * You can obtain a copy of the LGPL 2.1 license at
  * http://www.opensource.org/licenses/lgpl-2.1
- *
+ * <p/>
  * You can obtain a copy of the CDDL 1.0 license at
  * http://www.opensource.org/licenses/cddl1
- *
+ * <p/>
  * You can obtain a copy of the EPL 1.0 license at
  * http://www.opensource.org/licenses/eclipse-1.0
- *
+ * <p/>
  * See the Licenses for the specific language governing permissions and
  * limitations under the Licenses.
- *
+ * <p/>
  * Alternatively, you can obtain a royalty free commercial license with less
  * limitations, transferable or non-transferable, directly at
  * https://github.com/titilink/titilink-framework
- *
+ * <p/>
  * titilink is a registered trademark of titilink.inc
  */
-package com.titilink.camel.rest.server;
+package com.titilink.camel.rest.connector;
 
 import com.titilink.camel.rest.common.AdapterRestletUtil;
 import com.titilink.camel.rest.common.RestletServerCall;
+import com.titilink.camel.rest.server.PluginableApplication;
+import com.titilink.camel.rest.server.RestletServerHelper;
 import com.titilink.common.log.AppLogger;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
@@ -49,13 +51,14 @@ import org.restlet.engine.adapter.ServerCall;
 import java.util.List;
 
 /**
- * 将HttpCore 请求转化为Restlet请求
- * <p>
- * @author by kam
- * @date 2015/05/01
+ * Restlet Http Adapter适配器
+ * @author kam
+ * @date 2015/10/21
  * @since v1.0.0
  */
-public class RestletServerWrapper {
+public class RestletConnector implements HttpConnector {
+
+    private static final AppLogger LOGGER = AppLogger.getInstance(RestletConnector.class);
 
     /**
      * 默认http端口
@@ -72,8 +75,6 @@ public class RestletServerWrapper {
      */
     private static final int INVALID_PORT = 0;
 
-    private static final AppLogger LOGGER = AppLogger.getInstance(RestletServerWrapper.class);
-
     /**
      * The associated Restlet application.
      */
@@ -89,7 +90,14 @@ public class RestletServerWrapper {
      */
     private transient RestletServerHelper helper;
 
-    public RestletServerWrapper(String host, int port, boolean supportSSL) {
+    /**
+     * 构造方法
+     *
+     * @param host
+     * @param port
+     * @param supportSSL
+     */
+    public RestletConnector(String host, int port, boolean supportSSL) {
         this.application = null;
         this.component = createComponent(supportSSL);
         this.helper = null;

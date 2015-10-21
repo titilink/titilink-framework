@@ -206,6 +206,16 @@ public final class RestClient {
         return represent;
     }
 
+    /**
+     *
+     * @param params
+     * @param additionalParams
+     * @param method
+     * @param msTimeout
+     * @param <T>
+     * @return
+     * @throws OperationException
+     */
     public static <T> BeanRepresentation<T> handleRequest(RestParameters<T> params,
                                                           AdditionalParameters additionalParams, String method, long msTimeout)
             throws OperationException {
@@ -320,6 +330,16 @@ public final class RestClient {
         return represent;
     }
 
+    /**
+     * 处理请求
+     *
+     * @param params 请求参数
+     * @param additionalParams 额外请求参数
+     * @param method 请求方法GET PUT POST DELETE
+     * @param <T> 返回响应类class
+     * @return 响应消息
+     * @throws OperationException
+     */
     public static <T> BeanRepresentation<T> handleRequest(RestParameters<T> params,
                                                           AdditionalParameters additionalParams, String method)
             throws OperationException {

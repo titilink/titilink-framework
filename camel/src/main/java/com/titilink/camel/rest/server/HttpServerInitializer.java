@@ -32,6 +32,7 @@
  */
 package com.titilink.camel.rest.server;
 
+import com.titilink.camel.rest.connector.HttpConnector;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -57,8 +58,14 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
      */
     private final boolean supportSSL;
 
-    public HttpServerInitializer(boolean supportSSL) {
+    /**
+     * Http插件
+     */
+    private final HttpConnector httpConnector;
+
+    public HttpServerInitializer(boolean supportSSL, HttpConnector httpConnector) {
         this.supportSSL = supportSSL;
+        this.httpConnector = httpConnector;
     }
 
     @Override
@@ -67,7 +74,7 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
         //默认的ChannelPipeline
         ChannelPipeline pipeline = ch.pipeline();
 
-        if (isSupportSSL()) {
+        if (supportSSL) {
             SSLEngine engine = ServerSslContextFactory.getServerContext().createSSLEngine();
             engine.setUseClientMode(false);
             pipeline.addLast("ssl", new SslHandler(engine));
@@ -79,11 +86,7 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("encoder", new HttpResponseEncoder());
         pipeline.addLast("chunkedWriter", new ChunkedWriteHandler());
 
-        pipeline.addLast("handler", new HttpServerHandler(supportSSL));
-    }
-
-    public boolean isSupportSSL() {
-        return supportSSL;
+        pipeline.addLast("handler", new HttpServerHandler(httpConnector));
     }
 
 }
