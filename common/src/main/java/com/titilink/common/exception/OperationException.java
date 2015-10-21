@@ -10,9 +10,8 @@ package com.titilink.common.exception;
 /**
  * 公共业务异常类
  * <p>
- * author by ganting
- * date 2015-05-01
- * since v1.0.0
+ * @author by kam
+ * @since v1.0.0
  */
 public class OperationException extends Exception {
 
