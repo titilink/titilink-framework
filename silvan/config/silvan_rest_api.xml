@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Silvan API配置 -->
+<apis>
+    <api>
+        <uriPrefix>/silvan/rest</uriPrefix>
+        <uri>/demo</uri>
+        <version>v1.0</version>
+        <resource>com.titilink.silvan.resource.DemoResource</resource>
+    </api>
+</apis>
