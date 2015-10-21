@@ -30,36 +30,49 @@
  *
  * titilink is a registered trademark of titilink.inc
  */
-package com.titilink.silvan.main;
-
-import com.titilink.camel.rest.server.RestServer;
-import com.titilink.common.log.AppLogger;
+package com.titilink.cache.consistencehash;
 
 /**
- * silvan启动进程入口函数
- * <p>
- * @author by kam
- * @date 2015/05/01
+ * 存储接口，任何存储实现都要实现该接口来提供存储服务
+ *
+ * @author kam
+ * @date 2015/10/21
  * @since v1.0.0
  */
-public final class SilvanMain {
-
-    private static final AppLogger LOGGER = AppLogger.getInstance(SilvanMain.class);
+public interface Store {
 
     /**
-     * 启动silvan
+     * 存储数据到节点
      *
-     * @param args
+     * @param key 数据key
+     * @param obj 数据
+     * @return true-存储成功 false-存储失败
      */
-    public static void main(String[] args) {
-        SilvanMain silvanMain = new SilvanMain();
-        silvanMain.start();
-    }
+    boolean add(String key, Object obj);
 
-    private void start() {
-        LOGGER.debug("start silvan...");
-        RestServer.startup();
-        LOGGER.debug("start silvan success...");
-    }
+    /**
+     * 根据数据key删除存储的数据
+     *
+     * @param key 数据key
+     * @return 要删除的数据，如果没有数据key对应的数据，返回null
+     */
+    Object remove(String key);
+
+    /**
+     * 根据数据key更新存储的数据
+     *
+     * @param key 数据key
+     * @param newObj 新的数据
+     * @return 被更新的数据，如果没有数据key对应的数据，返回null
+     */
+    Object update(String key, Object newObj);
+
+    /**
+     * 根据数据key查询存储的数据
+     *
+     * @param key 数据key
+     * @return 存储中的数据，如果没有数据key对应的数据，返回null
+     */
+    Object get(String key);
 
 }

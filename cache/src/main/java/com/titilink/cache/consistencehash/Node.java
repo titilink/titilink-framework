@@ -30,36 +30,66 @@
  *
  * titilink is a registered trademark of titilink.inc
  */
-package com.titilink.silvan.main;
+package com.titilink.cache.consistencehash;
 
-import com.titilink.camel.rest.server.RestServer;
-import com.titilink.common.log.AppLogger;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * silvan启动进程入口函数
- * <p>
- * @author by kam
- * @date 2015/05/01
+ * 通过内存hashmap来实现存储服务
+ *
+ * @author kam
+ * @date 2015/10/21
  * @since v1.0.0
  */
-public final class SilvanMain {
-
-    private static final AppLogger LOGGER = AppLogger.getInstance(SilvanMain.class);
+public class Node implements Store{
 
     /**
-     * 启动silvan
-     *
-     * @param args
+     * 节点IP
      */
-    public static void main(String[] args) {
-        SilvanMain silvanMain = new SilvanMain();
-        silvanMain.start();
+    String ip;
+
+    /**
+     * 节点存储的数据
+     */
+    private ConcurrentHashMap<String, Object> datas = new ConcurrentHashMap<>();
+
+    /**
+     * 构造节点
+     *
+     * @param ip 及诶单IP
+     */
+    public Node(String ip) {
+        this.ip = ip;
     }
 
-    private void start() {
-        LOGGER.debug("start silvan...");
-        RestServer.startup();
-        LOGGER.debug("start silvan success...");
+    @Override
+    public boolean add(String key, Object obj) {
+        Object storeObj = datas.put(key, obj);
+        return storeObj != null;
+    }
+
+    @Override
+    public Object remove(String key) {
+        return datas.remove(key);
+    }
+
+    @Override
+    public Object update(String key, Object newObj) {
+        return datas.replace(key, newObj);
+    }
+
+    @Override
+    public Object get(String key) {
+        return datas.get(key);
+    }
+
+    /**
+     * {No Java-doc}
+     *
+     * @see{Object.toString}
+     */
+    public String toString() {
+        return this.ip;
     }
 
 }
