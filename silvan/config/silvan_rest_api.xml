@@ -4,7 +4,7 @@
     <api>
         <uriPrefix>/silvan/rest</uriPrefix>
         <uri>/demo</uri>
-        <version>v1.0</version>
+        <versions>v1.0</versions>
         <resource>com.titilink.silvan.resource.DemoResource</resource>
     </api>
 </apis>

@@ -2,9 +2,9 @@
 <!-- Silvan API配置 -->
 <apis>
     <api>
-        <uriPrefix>1</uriPrefix>
-        <uri>2</uri>
-        <versions>1.0</versions>
-        <resource>3</resource>
+        <uriPrefix>/silvan/rest</uriPrefix>
+        <uri>/demo</uri>
+        <versions>v1.0</versions>
+        <resource>com.titilink.silvan.resource.DemoResource</resource>
     </api>
 </apis>

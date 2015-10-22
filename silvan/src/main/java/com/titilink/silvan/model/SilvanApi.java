@@ -33,7 +33,6 @@
 package com.titilink.silvan.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import java.util.List;
 
@@ -47,12 +46,16 @@ import java.util.List;
 @XStreamAlias("api")
 public class SilvanApi {
 
+    @XStreamAlias("uriPrefix")
     private String uriPrefix;
 
+    @XStreamAlias("uri")
     private String uri;
 
+    @XStreamAlias("versions")
     private List<String> versions;
 
+    @XStreamAlias("resource")
     private String resource;
 
     public String getUriPrefix() {

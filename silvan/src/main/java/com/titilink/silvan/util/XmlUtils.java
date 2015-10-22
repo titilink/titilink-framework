@@ -33,46 +33,44 @@
 package com.titilink.silvan.util;
 
 import com.thoughtworks.xstream.XStream;
-import com.titilink.silvan.model.ApiList;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import java.io.File;
 import java.io.InputStream;
 
 /**
- * xml文件转化为bean对象
- * <p>
+ * xml工具类，通过xstream实现xml和bean之间的互相转化
+ *
  * @author by kam
- * @date 2015/05/01
+ * @date 2015/10/21
  * @since v1.0.0
  */
-public final class XmlToBean {
+public final class XmlUtils {
 
-    private static final XmlToBean instance = new XmlToBean();
-
-    private XmlToBean() {
-
+    public static <T> T toBean(String xmlStr, Class<T> clazz) {
+        XStream xStream = new XStream(new DomDriver());
+        xStream.processAnnotations(clazz);
+        T obj = (T) xStream.fromXML(xmlStr);
+        return obj;
     }
 
-    /**
-     * 获取单例类
-     *
-     * @return 返回XmlToBean的单例
-     */
-    public static XmlToBean getInstance() {
-        return instance;
+    public static <T> T toBean(File file, Class<T> clazz) {
+        XStream xStream = new XStream(new DomDriver());
+        xStream.processAnnotations(clazz);
+        T obj = (T) xStream.fromXML(file);
+        return obj;
     }
 
-    /**
-     * 获取配置文件中的API信息
-     *
-     * @param is API的文件流
-     * @return API信息
-     */
-    public ApiList getApiConfig(InputStream is) {
-        XStream xstream = new XStream();
-        ApiList apiList = (ApiList) xstream.fromXML(is);
-        return apiList;
+    public static <T> T toBean(InputStream is, Class<T> clazz) {
+        XStream xStream = new XStream(new DomDriver());
+        xStream.processAnnotations(clazz);
+        T obj = (T) xStream.fromXML(is);
+        return obj;
     }
 
-
+    public static <T> String toXml(T t) {
+        XStream xStream = new XStream(new DomDriver());
+        return xStream.toXML(t);
+    }
 
 }
