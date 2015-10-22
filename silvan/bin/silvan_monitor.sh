@@ -87,22 +87,22 @@ start()
 stop()
 {
     # do singleton protect
-        if status >/dev/null ; then
-            logger_without_echo "process is running, try to stop it"
-        else
-            logger_without_echo "process is not running, no need to stop"
-            return 2;
-        fi
+    if status >/dev/null ; then
+        logger_without_echo "process is running, try to stop it"
+    else
+        logger_without_echo "process is not running, no need to stop"
+        return 2;
+    fi
 
-        RETVAL=0
+    RETVAL=0
 
-        # stop process
-        sh stop_silvan.sh
-        if [ $? -eq 0 ] ; then
-            logger "stopsuccess"
-        else
-            die "stop fail"
-        fi
+    # stop process
+    sh stop_silvan.sh
+    if [ $? -eq 0 ] ; then
+        logger "stopsuccess"
+    else
+        die "stop fail"
+    fi
 }
 
 # for restart

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Silvan API配置 -->
+<apis>
+    <api>
+        <uriPrefix>1</uriPrefix>
+        <uri>2</uri>
+        <versions>1.0</versions>
+        <resource>3</resource>
+    </api>
+</apis>

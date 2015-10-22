@@ -2,7 +2,7 @@
 
 umask 0027
 
-SERVICE_USER=appserver
+SERVICE_USER=hae
 MODULE_NAME=silvan
 
 LOGGER_MAXSIZE=5120
@@ -38,14 +38,13 @@ logger_without_echo()
     echo "[` date -d today +\"%Y-%m-%d %H:%M:%S\"`,000] $*" >>$LOGGER_FILE
 
 }
-# log
+
 logger()
 {
     logger_without_echo $*
     echo "$*"
 }
 
-# exit with msg printed
 die()
 {
     logger "$*"
@@ -64,9 +63,10 @@ initLogDir()
 
 chkUser()
 {
-
+    if [ `whoami` != "${SERVICE_USER}" ]; then
+        logger "silvan can only start by hae"
+        die
+    fi
 }
-
-initLogDir
 
 

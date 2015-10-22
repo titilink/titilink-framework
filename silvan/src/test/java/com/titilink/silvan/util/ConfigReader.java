@@ -1,99 +1,95 @@
 /**
  * Copyright 2005-2015 titilink
- *
+ * <p/>
  * The contents of this file are subject to the terms of one of the following
  * open source licenses: Apache 2.0 or LGPL 3.0 or LGPL 2.1 or CDDL 1.0 or EPL
  * 1.0 (the "Licenses"). You can select the license that you prefer but you may
  * not use this file except in compliance with one of these Licenses.
- *
+ * <p/>
  * You can obtain a copy of the Apache 2.0 license at
  * http://www.opensource.org/licenses/apache-2.0
- *
+ * <p/>
  * You can obtain a copy of the LGPL 3.0 license at
  * http://www.opensource.org/licenses/lgpl-3.0
- *
+ * <p/>
  * You can obtain a copy of the LGPL 2.1 license at
  * http://www.opensource.org/licenses/lgpl-2.1
- *
+ * <p/>
  * You can obtain a copy of the CDDL 1.0 license at
  * http://www.opensource.org/licenses/cddl1
- *
+ * <p/>
  * You can obtain a copy of the EPL 1.0 license at
  * http://www.opensource.org/licenses/eclipse-1.0
- *
+ * <p/>
  * See the Licenses for the specific language governing permissions and
  * limitations under the Licenses.
- *
+ * <p/>
  * Alternatively, you can obtain a royalty free commercial license with less
  * limitations, transferable or non-transferable, directly at
  * https://github.com/titilink/titilink-framework
- *
+ * <p/>
  * titilink is a registered trademark of titilink.inc
  */
-package com.titilink.silvan.model;
+package com.titilink.silvan.util;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-
-import java.util.List;
 
 /**
- * 描述：
- * <p>
- * @author by kam
- * @date 2015/05/01
- * @since v1.0.0
+ * 描述：[描述]
+ * @author kam
+ * @date 2015/10/21
+ * @since [版本号]
  */
-@XStreamAlias("api")
-public class SilvanApi {
+@XStreamAlias("config")
+public class ConfigReader {
 
-    private String uriPrefix;
+    private String datasource;
 
-    private String uri;
+    private String ipaddress;
 
-    private List<String> versions;
+    private String logfilename;
 
-    private String resource;
+    private String appender;
 
-    public String getUriPrefix() {
-        return uriPrefix;
+    public String getDatasource() {
+        return datasource;
     }
 
-    public void setUriPrefix(String uriPrefix) {
-        this.uriPrefix = uriPrefix;
+    public void setDatasource(String datasource) {
+        this.datasource = datasource;
     }
 
-    public String getUri() {
-        return uri;
+    public String getIpaddress() {
+        return ipaddress;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setIpaddress(String ipaddress) {
+        this.ipaddress = ipaddress;
     }
 
-    public List<String> getVersions() {
-        return versions;
+    public String getLogfilename() {
+        return logfilename;
     }
 
-    public void setVersions(List<String> versions) {
-        this.versions = versions;
+    public void setLogfilename(String logfilename) {
+        this.logfilename = logfilename;
     }
 
-    public String getResource() {
-        return resource;
+    public String getAppender() {
+        return appender;
     }
 
-    public void setResource(String resource) {
-        this.resource = resource;
+    public void setAppender(String appender) {
+        this.appender = appender;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("SilvanApi{");
-        sb.append("uriPrefix='").append(uriPrefix).append('\'');
-        sb.append(", uri='").append(uri).append('\'');
-        sb.append(", versions=").append(versions);
-        sb.append(", resource='").append(resource).append('\'');
+        final StringBuilder sb = new StringBuilder("ConfigReader{");
+        sb.append("datasource='").append(datasource).append('\'');
+        sb.append(", ipaddress='").append(ipaddress).append('\'');
+        sb.append(", logfilename='").append(logfilename).append('\'');
+        sb.append(", appender='").append(appender).append('\'');
         sb.append('}');
         return sb.toString();
     }

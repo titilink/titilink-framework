@@ -67,7 +67,7 @@ public class AdapterRestletUtil {
 
     private static final AppLogger LOGGER = AppLogger.getInstance(AdapterRestletUtil.class);
 
-    private static final String PLUGINABLE_APPLICATION = "com.titilink.camel.server.application.PluginableApplication";
+    private static final String PLUGINABLE_APPLICATION = "com.titilink.camel.rest.server.PluginableApplication";
 
     public static final int DEFAULT_HTTP_PORT = -1;
 

@@ -55,7 +55,7 @@ fi
 sleep 3;
 procnum=$(ps -wwef | grep "silvan.main.proc" | grep -cv grep)
 if [ "$procnum" -ne "1" ]; then
-    logger "start proc more than one at the same time.";
+    logger "start proc fail or more than one at the same time.";
     pid=$(ps -wwef | grep "silvan.main.proc" | grep -v grep | awk '{print $2}')
     kill -9 ${pid}
     logger "killed all processes, please run it again."

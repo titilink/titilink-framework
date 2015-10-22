@@ -32,6 +32,9 @@
  */
 package com.titilink.silvan.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+
 import java.util.List;
 
 /**
@@ -41,8 +44,10 @@ import java.util.List;
  * @date 2015/05/01
  * @since v1.0.0
  */
+@XStreamAlias("apis")
 public class ApiList {
 
+    @XStreamImplicit(itemFieldName = "api")
     private List<SilvanApi> apis;
 
     public List<SilvanApi> getApis() {
