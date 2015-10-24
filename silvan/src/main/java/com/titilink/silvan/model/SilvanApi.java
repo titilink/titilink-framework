@@ -33,6 +33,7 @@
 package com.titilink.silvan.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class SilvanApi {
     @XStreamAlias("uri")
     private String uri;
 
-    @XStreamAlias("versions")
+    @XStreamImplicit()
     private List<String> versions;
 
     @XStreamAlias("resource")

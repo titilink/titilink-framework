@@ -93,15 +93,15 @@ public final class ValidationUtil {
             return null;
         }
 
-        Set<RootResponse> errorBoxs = new HashSet<RootResponse>(set.size());
+        Set<RootResponse> errorBoxes = new HashSet<>(set.size());
         for (ConstraintViolation<T> c : set) {
-            String nessage = c.getMessage();
-            if (StringUtils.isNotEmpty(nessage)) {
-                String[] item = nessage.split(MESSAGE_TEMPLATE_SEPARATOR);
-                errorBoxs.add(new RootResponse(item[0], item[1]));
+            String message = c.getMessage();
+            if (StringUtils.isNotEmpty(message)) {
+                String[] item = message.split(MESSAGE_TEMPLATE_SEPARATOR);
+                errorBoxes.add(new RootResponse(item[0], item[1]));
             }
         }
-        return errorBoxs;
+        return errorBoxes;
     }
 
     /**

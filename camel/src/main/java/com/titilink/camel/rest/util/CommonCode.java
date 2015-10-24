@@ -43,6 +43,6 @@ public class CommonCode {
 
     public static final String INVALID_INPUT_PARAMETER = "";
 
-    public static final int INVOKE_INTERFACE_EXCEPTION = 0;
+    public static final String INVOKE_INTERFACE_EXCEPTION = "100";
 
 }

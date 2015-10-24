@@ -41,25 +41,38 @@ package com.titilink.common.exception;
  */
 public class OperationException extends Exception {
 
-    private Object code;
+    private int status;
+
+    private String errorCode;
 
     public OperationException(String errorCode) {
-
+        this(500, errorCode, null);
     }
 
-    public OperationException(String invalidInputParameter, String s) {
-
+    public OperationException(String errorCode, String message) {
+        this(500, errorCode, message);
     }
 
-    public OperationException(int code, Object code1, String message) {
-
+    public OperationException(int status, String errorCode, String message) {
+        super(message);
+        this.status = status;
+        this.errorCode = errorCode;
     }
 
-    public OperationException(int code, String message) {
-
+    public int getStatus() {
+        return status;
     }
 
-    public Object getCode() {
-        return code;
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("OperationException{");
+        sb.append("status=").append(status);
+        sb.append(", errorCode='").append(errorCode);
+        sb.append('}');
+        return sb.toString();
     }
 }

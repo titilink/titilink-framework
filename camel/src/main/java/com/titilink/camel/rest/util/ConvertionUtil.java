@@ -32,7 +32,10 @@
  */
 package com.titilink.camel.rest.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.titilink.common.exception.OperationException;
 import com.titilink.common.log.AppLogger;
 import org.restlet.Request;
@@ -125,6 +128,10 @@ public final class ConvertionUtil {
         }
 
         ObjectMapper mp = new ObjectMapper();
+        mp.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, false);
+        mp.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
+        mp.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true);
+
         T bean = null;
         try {
             bean = mp.readValue(json, clazz);
@@ -144,17 +151,19 @@ public final class ConvertionUtil {
             return null;
         }
 
-        Representation representation = new JacksonRepresentation<T>(bean);
-        String jsonStr = null;
+        ObjectMapper mp = new ObjectMapper();
+        mp.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        mp.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mp.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
+
+        String ret = "";
         try {
-            representation.setCharacterSet(CharacterSet.UTF_8);
-            jsonStr = representation.getText();
-        } catch (IOException e) {
+            ret = mp.writeValueAsString(bean);
+        } catch (JsonProcessingException e) {
             LOGGER.error(
                     "convertBean2Json FAILED! Exception while bean to json:", e);
         }
-
-        return jsonStr;
+        return ret;
     }
 
     /**

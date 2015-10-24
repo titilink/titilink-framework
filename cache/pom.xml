@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.titilink.framework</groupId>
-    <artifactId>cache</artifactId>
+    <artifactId>titilink-cache</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>cache</name>
     <packaging>jar</packaging>

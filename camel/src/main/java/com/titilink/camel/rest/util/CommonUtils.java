@@ -273,7 +273,8 @@ public final class CommonUtils {
                         field, instance);
 
                 LOGGER.error("trimAndCheckParameter method error, trim exception e=", e);
-                throw new OperationException(Status.CLIENT_ERROR_BAD_REQUEST.getCode(), e.getCode(), e.getMessage());
+                throw new OperationException(Status.CLIENT_ERROR_BAD_REQUEST.getCode(),
+                        e.getErrorCode(), e.getMessage());
             } catch (Exception e) {
                 LOGGER.error("trimAndCheckParameter method error, trim exception field={}, instance={}",
                         field, instance);

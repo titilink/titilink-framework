@@ -32,6 +32,9 @@
  */
 package com.titilink.silvan.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.titilink.camel.rest.common.RestResponse;
+
 import java.io.Serializable;
 
 /**
@@ -41,7 +44,8 @@ import java.io.Serializable;
  * @date 2015/05/01
  * @since v1.0.0
  */
-public class SilvanResponse implements Serializable {
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class SilvanResponse {
 
 
 

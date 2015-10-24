@@ -30,66 +30,69 @@
  * <p/>
  * titilink is a registered trademark of titilink.inc
  */
-package com.titilink.silvan.util;
+package com.titilink.silvan.resource.model;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.titilink.camel.rest.util.CommonCode;
+import com.titilink.camel.rest.util.ValidationUtil;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 描述：[描述]
  * @author kam
- * @date 2015/10/21
+ * @date 2015/10/22
  * @since [版本号]
  */
-@XStreamAlias("config")
-public class ConfigReader {
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class DemoRequest {
 
-    private String datasource;
+    @NotNull(message= CommonCode.INVALID_INPUT_PARAMETER + ValidationUtil.MESSAGE_TEMPLATE_SEPARATOR +
+         "can not be null")
+    @JsonProperty("name")
+    private String name;
 
-    private String ipaddress;
+    @NotNull(message= CommonCode.INVALID_INPUT_PARAMETER + ValidationUtil.MESSAGE_TEMPLATE_SEPARATOR +
+        "can not be null")
+    @JsonProperty("age")
+    private int age;
 
-    private String logfilename;
+    @NotNull(message= CommonCode.INVALID_INPUT_PARAMETER + ValidationUtil.MESSAGE_TEMPLATE_SEPARATOR +
+        "can not be null")
+    @JsonProperty("sex")
+    private boolean sex;
 
-    private String appender;
-
-    public String getDatasource() {
-        return datasource;
+    public String getName() {
+        return name;
     }
 
-    public void setDatasource(String datasource) {
-        this.datasource = datasource;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getIpaddress() {
-        return ipaddress;
+    public int getAge() {
+        return age;
     }
 
-    public void setIpaddress(String ipaddress) {
-        this.ipaddress = ipaddress;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getLogfilename() {
-        return logfilename;
+    public boolean isSex() {
+        return sex;
     }
 
-    public void setLogfilename(String logfilename) {
-        this.logfilename = logfilename;
-    }
-
-    public String getAppender() {
-        return appender;
-    }
-
-    public void setAppender(String appender) {
-        this.appender = appender;
+    public void setSex(boolean sex) {
+        this.sex = sex;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ConfigReader{");
-        sb.append("datasource='").append(datasource).append('\'');
-        sb.append(", ipaddress='").append(ipaddress).append('\'');
-        sb.append(", logfilename='").append(logfilename).append('\'');
-        sb.append(", appender='").append(appender).append('\'');
+        final StringBuilder sb = new StringBuilder("DemoRequest{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(", sex=").append(sex);
         sb.append('}');
         return sb.toString();
     }

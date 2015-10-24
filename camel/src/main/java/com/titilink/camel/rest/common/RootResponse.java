@@ -46,7 +46,8 @@ public class RootResponse {
     private String message;
 
     public RootResponse(String code, String message) {
-
+        this.code = code;
+        this.message = message;
     }
 
     public String getCode() {

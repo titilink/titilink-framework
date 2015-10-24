@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-    <datasource>IRIS</datasource>
-    <ipaddress>9.124.74.85</ipaddress>
-    <logfilename>DailyLogApplication.log</logfilename>
-    <appender>console</appender>
-</config>
