@@ -32,10 +32,9 @@ logger_without_echo()
     fi
 
     if [ "$logsize" -gt "$LOGGER_MAXSIZE" ]; then
-        # 每次删除最开始的10000行，约300K
-        sed -i '1,10000d' $LOGGER_FILE
+        sed -i '1,10000d' ${LOGGER_FILE}
     fi
-    echo "[` date -d today +\"%Y-%m-%d %H:%M:%S\"`,000] $*" >>$LOGGER_FILE
+    echo "[` date -d today +\"%Y-%m-%d %H:%M:%S\"`,000] $*" >>${LOGGER_FILE}
 
 }
 
@@ -64,7 +63,7 @@ initLogDir()
 chkUser()
 {
     if [ `whoami` != "${SERVICE_USER}" ]; then
-        logger "silvan can only start by hae"
+        logger "silvan can only start by ${SERVICE_USER}"
         die
     fi
 }

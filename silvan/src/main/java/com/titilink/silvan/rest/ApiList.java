@@ -30,7 +30,7 @@
  *
  * titilink is a registered trademark of titilink.inc
  */
-package com.titilink.silvan.model;
+package com.titilink.silvan.rest;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -44,60 +44,24 @@ import java.util.List;
  * @date 2015/05/01
  * @since v1.0.0
  */
-@XStreamAlias("api")
-public class SilvanApi {
+@XStreamAlias("apis")
+public class ApiList {
 
-    @XStreamAlias("uriPrefix")
-    private String uriPrefix;
+    @XStreamImplicit(itemFieldName = "api")
+    private List<SilvanApi> apis;
 
-    @XStreamAlias("uri")
-    private String uri;
-
-    @XStreamImplicit()
-    private List<String> versions;
-
-    @XStreamAlias("resource")
-    private String resource;
-
-    public String getUriPrefix() {
-        return uriPrefix;
+    public List<SilvanApi> getApis() {
+        return apis;
     }
 
-    public void setUriPrefix(String uriPrefix) {
-        this.uriPrefix = uriPrefix;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public List<String> getVersions() {
-        return versions;
-    }
-
-    public void setVersions(List<String> versions) {
-        this.versions = versions;
-    }
-
-    public String getResource() {
-        return resource;
-    }
-
-    public void setResource(String resource) {
-        this.resource = resource;
+    public void setApis(List<SilvanApi> apis) {
+        this.apis = apis;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("SilvanApi{");
-        sb.append("uriPrefix='").append(uriPrefix).append('\'');
-        sb.append(", uri='").append(uri).append('\'');
-        sb.append(", versions=").append(versions);
-        sb.append(", resource='").append(resource).append('\'');
+        final StringBuilder sb = new StringBuilder("ApiList{");
+        sb.append("apis=").append(apis);
         sb.append('}');
         return sb.toString();
     }

@@ -34,8 +34,6 @@ package com.titilink.silvan.rest;
 
 import com.titilink.camel.rest.common.ApplicationPlugin;
 import com.titilink.common.log.AppLogger;
-import com.titilink.silvan.model.ApiList;
-import com.titilink.silvan.model.SilvanApi;
 import com.titilink.silvan.util.XmlUtils;
 import org.restlet.resource.ServerResource;
 import org.restlet.routing.Router;

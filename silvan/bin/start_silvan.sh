@@ -5,10 +5,6 @@
 
 getCurPath()
 {
-    # 1。如果当前目录就是install文件所在位置，直接pwd取得绝对路径；
-    # 2。而如果是从其他目录来调用install的情况，先cd到install文
-    #    件所在目录,再取得install的绝对路径，并返回至原目录下。
-    # 3。使用install调用该文件，使用的是当前目录路径
     if [ "` dirname "$0" `" = "" ] || [ "` dirname "$0" `" = "." ] ; then
         CURRENT_PATH="`pwd`"
     else
@@ -41,7 +37,7 @@ done
 # 启动函数
 logger "starting silvan..."
 
-java -Xms64m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m -Dname=silvan.main.proc -classpath ${classpath1} com.titilink.silvan.main.SilvanMain 1>/dev/null 2>&1 &
+nohup java -Xms64m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m -Dname=silvan.main.proc -classpath ${classpath1} com.titilink.silvan.main.SilvanMain 1>/dev/null 2>&1 &
 
 RESULT=$?
 if [ "$RESULT" -ne "0" ]; then

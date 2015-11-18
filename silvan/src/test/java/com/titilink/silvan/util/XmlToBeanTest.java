@@ -32,7 +32,7 @@
  */
 package com.titilink.silvan.util;
 
-import com.titilink.silvan.model.ApiList;
+import com.titilink.silvan.rest.ApiList;
 import org.junit.Test;
 
 import java.io.File;
